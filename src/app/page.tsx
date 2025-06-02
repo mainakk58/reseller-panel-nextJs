@@ -1,12 +1,12 @@
-import MyChart from "@/components/MyChart";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <p>Hello</p>
-      <p>This is a reseller panel</p>
-      <h1>ApexCharts with Next.js & TypeScript</h1>
-      <MyChart />
+      <div className="w-[300px] flex justify-evenly">
+        <Link href={"/teacher"}>Teacher</Link>
+        <Link href={"/reseller"}>reseller</Link>
+      </div>
     </>
   );
 }
