@@ -1,9 +1,11 @@
-import AuthenticationForm from "@/components/authentication/AuthenticationForm";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <AuthenticationForm />
+      {/* <AuthenticationForm /> */}
+
+      <Link href={"/teacher"}>Teacher</Link>
     </>
   );
 }
