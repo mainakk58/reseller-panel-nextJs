@@ -95,13 +95,12 @@ const AuthenticationForm = () => {
   };
 
   const handlePhoneVerification = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const phoneError = validatePhone(phone);
     if (phoneError) {
       setErrors({phone: phoneError});
       return;
     }
-
-    // freeze button for verify button
 
     console.log("Sending OTP to phone:", phone);
     toast.success("OTP sent to your phone!", {
@@ -174,8 +173,6 @@ const AuthenticationForm = () => {
     };
 
     console.log("Final form data:", formData);
-    // toast notify
-    // alert("Form submitted successfully! Check console for data.");
   };
 
   return (
