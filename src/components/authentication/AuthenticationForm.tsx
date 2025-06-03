@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {toast} from "react-toastify";
 
 interface FormErrors {
@@ -38,7 +38,8 @@ const AuthenticationForm = () => {
     return null;
   };
 
-  const handleEmailVerification = () => {
+  const handleEmailVerification = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const emailError = validateEmail(email);
     if (emailError) {
       setErrors({email: emailError});
@@ -58,7 +59,8 @@ const AuthenticationForm = () => {
     setErrors({});
   };
 
-  const handleEmailOtpSubmit = () => {
+  const handleEmailOtpSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!emailOtp) {
       setErrors({emailOtp: "Please enter OTP"});
       return;
@@ -78,11 +80,21 @@ const AuthenticationForm = () => {
       setStep(2);
       setErrors({});
     } else {
-      setErrors({emailOtp: "Invalid OTP"});
+      toast.error("Invalid OTP!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // setErrors({emailOtp: "Invalid OTP"});
     }
   };
 
-  const handlePhoneVerification = () => {
+  const handlePhoneVerification = (e: FormEvent<HTMLFormElement>) => {
     const phoneError = validatePhone(phone);
     if (phoneError) {
       setErrors({phone: phoneError});
@@ -106,7 +118,8 @@ const AuthenticationForm = () => {
     setErrors({});
   };
 
-  const handlePhoneOtpSubmit = () => {
+  const handlePhoneOtpSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!phoneOtp) {
       setErrors({phoneOtp: "Please enter OTP"});
       return;
@@ -127,11 +140,22 @@ const AuthenticationForm = () => {
       setStep(3);
       setErrors({});
     } else {
-      setErrors({phoneOtp: "Invalid OTP"});
+      toast.error("Invalid OTP!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // setErrors({phoneOtp: "Invalid OTP"});
     }
   };
 
-  const handleFinalSubmit = () => {
+  const handleFinalSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!name || !title || !username) {
       setErrors({
         name: !name ? "Name is required" : "",
@@ -165,59 +189,63 @@ const AuthenticationForm = () => {
                   Email Verification
                 </h2>
                 {!showEmailOtp ? (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-2 border rounded"
-                        placeholder="Enter your email"
-                      />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.email}
-                        </p>
-                      )}
+                  <form onSubmit={handleEmailVerification}>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full p-2 border rounded"
+                          placeholder="Enter your email"
+                        />
+                        {errors.email && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.email}
+                          </p>
+                        )}
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                      >
+                        Send OTP
+                      </button>
                     </div>
-                    <button
-                      onClick={handleEmailVerification}
-                      className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                    >
-                      Send OTP
-                    </button>
-                  </div>
+                  </form>
                 ) : (
                   <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">
-                        Enter OTP
-                      </label>
-                      <input
-                        type="text"
-                        value={emailOtp}
-                        onChange={(e) => setEmailOtp(e.target.value)}
-                        className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter 6-digit OTP"
-                      />
-                      {errors.emailOtp && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.emailOtp}
+                    <form onSubmit={handleEmailOtpSubmit}>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Enter OTP
+                        </label>
+                        <input
+                          type="text"
+                          value={emailOtp}
+                          onChange={(e) => setEmailOtp(e.target.value)}
+                          className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                          placeholder="Enter 6-digit OTP"
+                        />
+                        {errors.emailOtp && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.emailOtp}
+                          </p>
+                        )}
+                        <p className="text-sm text-gray-600 mt-1">
+                          OTP sent to: {email}
                         </p>
-                      )}
-                      <p className="text-sm text-gray-600 mt-1">
-                        OTP sent to: {email}
-                      </p>
-                    </div>
-                    <button
-                      onClick={handleEmailOtpSubmit}
-                      className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-                    >
-                      Verify Email
-                    </button>
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                      >
+                        Verify Email
+                      </button>
+                    </form>
                   </div>
                 )}
               </>
@@ -229,59 +257,63 @@ const AuthenticationForm = () => {
                   Phone Verification
                 </h2>
                 {!showPhoneOtp ? (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full p-2 border rounded"
-                        placeholder="Enter 10-digit phone number"
-                      />
-                      {errors.phone && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.phone}
-                        </p>
-                      )}
+                  <form onSubmit={handlePhoneVerification}>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="w-full p-2 border rounded"
+                          placeholder="Enter 10-digit phone number"
+                        />
+                        {errors.phone && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.phone}
+                          </p>
+                        )}
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                      >
+                        Send OTP
+                      </button>
                     </div>
-                    <button
-                      onClick={handlePhoneVerification}
-                      className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                    >
-                      Send OTP
-                    </button>
-                  </div>
+                  </form>
                 ) : (
                   <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">
-                        Enter OTP
-                      </label>
-                      <input
-                        type="text"
-                        value={phoneOtp}
-                        onChange={(e) => setPhoneOtp(e.target.value)}
-                        className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter 6-digit OTP"
-                      />
-                      {errors.phoneOtp && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.phoneOtp}
+                    <form onSubmit={handlePhoneOtpSubmit}>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">
+                          Enter OTP
+                        </label>
+                        <input
+                          type="text"
+                          value={phoneOtp}
+                          onChange={(e) => setPhoneOtp(e.target.value)}
+                          className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                          placeholder="Enter 6-digit OTP"
+                        />
+                        {errors.phoneOtp && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.phoneOtp}
+                          </p>
+                        )}
+                        <p className="text-sm text-gray-600 mt-1">
+                          OTP sent to: {phone}
                         </p>
-                      )}
-                      <p className="text-sm text-gray-600 mt-1">
-                        OTP sent to: {phone}
-                      </p>
-                    </div>
-                    <button
-                      onClick={handlePhoneOtpSubmit}
-                      className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-                    >
-                      Verify Phone
-                    </button>
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                      >
+                        Verify Phone
+                      </button>
+                    </form>
                   </div>
                 )}
               </>
@@ -291,102 +323,107 @@ const AuthenticationForm = () => {
 
         {step === 3 && (
           <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-xl">
-            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
-              Complete Your Profile
-            </h2>
+            <form onSubmit={handleFinalSubmit}>
+              <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+                Complete Your Profile
+              </h2>
 
-            <div className="space-y-6">
-              <div className="relative">
-                <label className="text-sm font-medium text-gray-600 block mb-1 relative">
-                  Email (Verified)
-                </label>
+              <div className="space-y-6">
                 <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    disabled
-                    className="w-full px-4 py-2 pr-10 bg-gray-100 text-gray-500 border border-gray-300 rounded-lg cursor-not-allowed"
-                  />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600 text-xl">
-                    ✓
-                  </span>
+                  <label className="text-sm font-medium text-gray-600 block mb-1 relative">
+                    Email (Verified)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={email}
+                      disabled
+                      className="w-full px-4 py-2 pr-10 bg-gray-100 text-gray-500 border border-gray-300 rounded-lg cursor-not-allowed"
+                    />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600 text-xl">
+                      ✓
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
-                  Phone (Verified)
-                </label>
-                <div className="relative">
-                  <input
-                    type="tel"
-                    value={phone}
-                    disabled
-                    className="w-full px-4 py-2 pr-10 bg-gray-100 text-gray-500 border border-gray-300 rounded-lg cursor-not-allowed"
-                  />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600 text-xl">
-                    ✓
-                  </span>
+                <div>
+                  <label className="text-sm font-medium text-gray-600 block mb-1">
+                    Phone (Verified)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      value={phone}
+                      disabled
+                      className="w-full px-4 py-2 pr-10 bg-gray-100 text-gray-500 border border-gray-300 rounded-lg cursor-not-allowed"
+                    />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-600 text-xl">
+                      ✓
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Name <span className="relative text-red-500 text-xl">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="John Doe"
-                />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-                )}
-              </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700 block mb-1">
+                    Name{" "}
+                    <span className="relative text-red-500 text-xl">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="John"
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Title <span className="relative text-red-500 text-xl">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Web Developer"
-                />
-                {errors.title && (
-                  <p className="text-red-500 text-sm mt-1">{errors.title}</p>
-                )}
-              </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700 block mb-1">
+                    Title{" "}
+                    <span className="relative text-red-500 text-xl">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Doe"
+                  />
+                  {errors.title && (
+                    <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+                  )}
+                </div>
 
-              <div>
-                <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Username{" "}
-                  <span className="relative text-red-500 text-xl">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="john123"
-                />
-                {errors.username && (
-                  <p className="text-red-500 text-sm mt-1">{errors.username}</p>
-                )}
-              </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700 block mb-1">
+                    Username{" "}
+                    <span className="relative text-red-500 text-xl">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="john123"
+                  />
+                  {errors.username && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.username}
+                    </p>
+                  )}
+                </div>
 
-              {/* Submit */}
-              <button
-                onClick={handleFinalSubmit}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-200"
-              >
-                Submit Profile
-              </button>
-            </div>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-200"
+                >
+                  Submit Profile
+                </button>
+              </div>
+            </form>
           </div>
         )}
 
