@@ -1,12 +1,9 @@
-import Link from "next/link";
+import AuthenticationForm from "@/components/authentication/AuthenticationForm";
 
 export default function Home() {
   return (
     <>
-      <div className="w-[300px] flex justify-evenly">
-        <Link href={"/teacher"}>Teacher</Link>
-        <Link href={"/reseller"}>reseller</Link>
-      </div>
+      <AuthenticationForm />
     </>
   );
 }

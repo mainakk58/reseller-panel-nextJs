@@ -1,7 +1,12 @@
 import TeacherDashboard from "@/components/page/teacher/TeacherDashboard";
 
 function page() {
-  return <TeacherDashboard />;
+  return (
+    <>
+  <TeacherDashboard />
+    </>
+
+);
 }
 
 export default page;

@@ -7,7 +7,7 @@ type DashboardProps = {
 const Dashboard = ({children}: DashboardProps) => {
   return (
     <div className="flex min-h-screen">
-      <aside className="w-[200px] bg-blue-300 p-4 flex flex-col gap-4 items-center">
+      <aside className="w-[300px] bg-[#6798cfab] p-4 flex flex-col gap-4 items-center">
         <div className="w-full border-b flex justify-center">
           <h1 className="text-lg font-bold  pb-2">Dashboard</h1>
         </div>
