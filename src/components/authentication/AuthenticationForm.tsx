@@ -44,8 +44,6 @@ const AuthenticationForm = () => {
       setErrors({email: emailError});
       return;
     }
-
-    // freeze button for verify button
     toast.success("OTP sent to your email!!", {
       position: "top-right",
       autoClose: 5000,
@@ -153,13 +151,12 @@ const AuthenticationForm = () => {
 
     console.log("Final form data:", formData);
     // toast notify
-    alert("Form submitted successfully! Check console for data.");
+    // alert("Form submitted successfully! Check console for data.");
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full flex flex-col items-center">
-        {/* Step 1 & 2 Container */}
         {(step === 1 || step === 2) && (
           <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
             {step === 1 && (
@@ -177,7 +174,7 @@ const AuthenticationForm = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-2 border rounded"
                         placeholder="Enter your email"
                       />
                       {errors.email && (
@@ -241,7 +238,7 @@ const AuthenticationForm = () => {
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-2 border rounded"
                         placeholder="Enter 10-digit phone number"
                       />
                       {errors.phone && (
@@ -299,8 +296,8 @@ const AuthenticationForm = () => {
             </h2>
 
             <div className="space-y-6">
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">
+              <div className="relative">
+                <label className="text-sm font-medium text-gray-600 block mb-1 relative">
                   Email (Verified)
                 </label>
                 <div className="relative">
@@ -335,7 +332,7 @@ const AuthenticationForm = () => {
 
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Name
+                  Name <span className="relative text-red-500 text-xl">*</span>
                 </label>
                 <input
                   type="text"
@@ -351,7 +348,7 @@ const AuthenticationForm = () => {
 
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Title
+                  Title <span className="relative text-red-500 text-xl">*</span>
                 </label>
                 <input
                   type="text"
@@ -365,10 +362,10 @@ const AuthenticationForm = () => {
                 )}
               </div>
 
-              {/* Username */}
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Username
+                  Username{" "}
+                  <span className="relative text-red-500 text-xl">*</span>
                 </label>
                 <input
                   type="text"
