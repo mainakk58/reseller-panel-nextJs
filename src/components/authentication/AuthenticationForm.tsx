@@ -46,6 +46,7 @@ const AuthenticationForm = () => {
 
     // freeze button for verify button
     console.log("Sending OTP to email:", email);
+    // toast notify
     alert("OTP sent to your email!");
     setShowEmailOtp(true);
     setErrors({});
@@ -58,6 +59,7 @@ const AuthenticationForm = () => {
     }
 
     if (emailOtp === "12") {
+      // toast notify
       alert("Email verified successfully!");
       setStep(2);
       setErrors({});
@@ -76,6 +78,7 @@ const AuthenticationForm = () => {
     // freeze button for verify button
 
     console.log("Sending OTP to phone:", phone);
+    // toast notify
     alert("OTP sent to your phone!");
     setShowPhoneOtp(true);
     setErrors({});
@@ -88,6 +91,7 @@ const AuthenticationForm = () => {
     }
 
     if (phoneOtp === "12") {
+      // toast notify
       alert("Phone verified successfully!");
       setStep(3);
       setErrors({});
@@ -115,6 +119,7 @@ const AuthenticationForm = () => {
     };
 
     console.log("Final form data:", formData);
+    // toast notify
     alert("Form submitted successfully! Check console for data.");
   };
 
