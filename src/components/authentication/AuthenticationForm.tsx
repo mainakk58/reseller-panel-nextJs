@@ -1,6 +1,7 @@
 "use client";
 
 import {useState} from "react";
+import {toast} from "react-toastify";
 
 interface FormErrors {
   email?: string;
@@ -45,9 +46,16 @@ const AuthenticationForm = () => {
     }
 
     // freeze button for verify button
-    console.log("Sending OTP to email:", email);
-    // toast notify
-    alert("OTP sent to your email!");
+    toast.success("OTP sent to your email!!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     setShowEmailOtp(true);
     setErrors({});
   };
@@ -59,8 +67,16 @@ const AuthenticationForm = () => {
     }
 
     if (emailOtp === "12") {
-      // toast notify
-      alert("Email verified successfully!");
+      toast.success("Email verified successfully!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       setStep(2);
       setErrors({});
     } else {
@@ -78,8 +94,16 @@ const AuthenticationForm = () => {
     // freeze button for verify button
 
     console.log("Sending OTP to phone:", phone);
-    // toast notify
-    alert("OTP sent to your phone!");
+    toast.success("OTP sent to your phone!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     setShowPhoneOtp(true);
     setErrors({});
   };
@@ -91,8 +115,17 @@ const AuthenticationForm = () => {
     }
 
     if (phoneOtp === "12") {
-      // toast notify
-      alert("Phone verified successfully!");
+      toast.success("Phone verified successfully!!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // alert("Phone verified successfully!");
       setStep(3);
       setErrors({});
     } else {
@@ -259,7 +292,6 @@ const AuthenticationForm = () => {
           </div>
         )}
 
-        {/* Step 3 Container (Wider) */}
         {step === 3 && (
           <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-xl">
             <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
@@ -267,7 +299,6 @@ const AuthenticationForm = () => {
             </h2>
 
             <div className="space-y-6">
-              {/* Verified Email */}
               <div>
                 <label className="text-sm font-medium text-gray-600 block mb-1">
                   Email (Verified)
@@ -285,7 +316,6 @@ const AuthenticationForm = () => {
                 </div>
               </div>
 
-              {/* Verified Phone */}
               <div>
                 <label className="text-sm font-medium text-gray-600 block mb-1">
                   Phone (Verified)
@@ -303,10 +333,9 @@ const AuthenticationForm = () => {
                 </div>
               </div>
 
-              {/* Full Name */}
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">
-                  Full Name
+                  Name
                 </label>
                 <input
                   type="text"
@@ -320,7 +349,6 @@ const AuthenticationForm = () => {
                 )}
               </div>
 
-              {/* Title */}
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">
                   Title
