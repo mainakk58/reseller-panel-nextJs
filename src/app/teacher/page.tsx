@@ -1,12 +1,7 @@
-import TeacherDashboard from "@/components/page/teacher/TeacherDashboard";
+"use client";
 
-function page() {
-  return (
-    <>
-    <TeacherDashboard />
-    </>
-
-);
+function Page() {
+  return <div className="flex">hello</div>;
 }
 
-export default page;
+export default Page;
