@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mantine/modals": "^8.0.2",
     "@reduxjs/toolkit": "^2.8.2",
     "apexcharts": "^4.7.0",
+    "clsx": "^2.1.1",
     "formik": "^2.4.6",
+    "mantine-datatable": "^7.17.1",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-apexcharts": "^1.7.0",
