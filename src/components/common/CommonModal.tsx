@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button, Input, Modal } from "rsuite";
+import {useEffect, useState} from "react";
+import {Button, Input, Modal, SelectPicker} from "rsuite";
 
 type Reseller = {
   id: string;
@@ -7,7 +7,8 @@ type Reseller = {
   phone: string;
   email: string;
   location: string;
-  state: string;
+  state?: string;
+  status?: string;
 };
 
 type Props = {
@@ -17,24 +18,36 @@ type Props = {
   onSave: (updated: Reseller) => void;
 };
 
-export default function CommonModal({ open, onClose, data, onSave }: Props) {
-  const [formData, setFormData] = useState(data);
+export default function CommonModal(props: Props) {
+  const [formData, setFormData] = useState(props.data);
 
   useEffect(() => {
-    if (open) setFormData(data);
-  }, [data, open]);
+    if (props.open) setFormData(props.data);
+  }, [props.data, open]);
 
   const handleChange = (key: keyof Reseller, value: string) => {
-    setFormData((prev) => ({ ...prev, [key]: value }));
+    setFormData((prev) => ({...prev, [key]: value}));
   };
 
   const handleSave = () => {
-    onSave(formData);
-    onClose();
+    props.onSave(formData);
+    props.onClose();
   };
 
+  const statusOptions = [
+    {label: "Pending", value: "pending"},
+    {label: "Verified", value: "approved"},
+    {label: "Blocked", value: "blocked"},
+    {label: "Rejected", value: "rejected"},
+  ];
+
   return (
-    <Modal open={open} onClose={onClose} size="sm" backdrop="static">
+    <Modal
+      open={props.open}
+      onClose={props.onClose}
+      size="sm"
+      backdrop="static"
+    >
       <Modal.Header>
         <Modal.Title>Edit Reseller Info</Modal.Title>
       </Modal.Header>
@@ -65,13 +78,20 @@ export default function CommonModal({ open, onClose, data, onSave }: Props) {
             value={formData.state}
             onChange={(val) => handleChange("state", val)}
           />
+          <SelectPicker
+            data={statusOptions}
+            value={formData.status}
+            onChange={(val) => handleChange("status", val || "")}
+            placeholder="Select Status"
+            style={{width: "100%"}}
+          />
         </div>
       </Modal.Body>
       <Modal.Footer>
         <Button appearance="primary" onClick={handleSave}>
           Save
         </Button>
-        <Button appearance="subtle" onClick={onClose}>
+        <Button appearance="subtle" onClick={props.onClose}>
           Cancel
         </Button>
       </Modal.Footer>

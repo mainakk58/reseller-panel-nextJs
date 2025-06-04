@@ -11,7 +11,8 @@ type Company = {
   phone: string;
   email: string;
   location: string;
-  state: string;
+  state?: string;
+  status?: string | undefined;
 };
 
 export default function Page() {
