@@ -1,12 +1,11 @@
 "use client";
-
 import {useState} from "react";
 import ArrowDownLeftIcon from "../../../../public/icons/ArrowDownLeftIcon";
 import ArrowUpRightIcon from "../../../../public/icons/ArrowUpRightIcon";
+import EyeIcon from "../../../../public/icons/EyeIconOn";
 import EyeOffIcon from "../../../../public/icons/EyeOffIcon";
 import HistoryIcon from "../../../../public/icons/HistoryIcon";
 import PlusIcon from "../../../../public/icons/PlusIcon";
-import SendIcon from "../../../../public/icons/SendIcon";
 import WalletIcon from "../../../../public/icons/WalletIcon";
 
 // Mock transaction data
@@ -68,7 +67,7 @@ function page() {
   const [showBalance, setShowBalance] = useState(true);
   const [transactions] = useState(transactionHistory);
 
-  const formatCurrency = (amount: any) => {
+  const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
@@ -101,11 +100,13 @@ function page() {
   };
 
   const handleSendMoney = () => {
+    // Send money logic here
     console.log("Send money clicked");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Top Navbar */}
       <nav className="bg-white shadow-lg border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -114,6 +115,7 @@ function page() {
               <h1 className="text-2xl font-bold text-gray-900">My Wallet</h1>
             </div>
 
+            {/* Wallet Balance Section */}
             <div className="flex items-center space-x-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg">
               <WalletIcon className="w-5 h-5" />
               <div className="flex items-center space-x-2">
@@ -128,7 +130,7 @@ function page() {
                   {showBalance ? (
                     <EyeOffIcon className="w-4 h-4" />
                   ) : (
-                    <EyeOffIcon className="w-4 h-4" />
+                    <EyeIcon className="w-4 h-4" />
                   )}
                 </button>
               </div>
@@ -137,10 +139,13 @@ function page() {
         </div>
       </nav>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {/* Wallet Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Balance & Quick Actions Combined */}
           <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-6 rounded-2xl shadow-xl">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-blue-100 text-sm font-medium">
                   Current Balance
@@ -153,26 +158,14 @@ function page() {
                 <WalletIcon className="w-8 h-8" />
               </div>
             </div>
-          </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Quick Actions
-            </h3>
-            <div className="space-y-3">
+            <div className="pt-4 border-t border-white/20">
               <button
                 onClick={handleAddMoney}
-                className="w-full flex items-center space-x-3 p-3 bg-green-50 hover:bg-green-100 text-green-700 rounded-xl transition-colors"
+                className="flex items-center justify-center space-x-3 p-3 bg-white/20 hover:bg-white/30 text-white rounded-xl transition-all duration-200 w-full backdrop-blur-sm"
               >
                 <PlusIcon className="w-5 h-5" />
-                <span className="font-medium">Add Money</span>
-              </button>
-              <button
-                onClick={handleSendMoney}
-                className="w-full flex items-center space-x-3 p-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl transition-colors"
-              >
-                <SendIcon className="w-5 h-5" />
-                <span className="font-medium">Send Money</span>
+                <span className="font-semibold">Add Money</span>
               </button>
             </div>
           </div>
