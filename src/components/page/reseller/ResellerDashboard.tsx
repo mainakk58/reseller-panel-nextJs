@@ -9,7 +9,7 @@ function ResellerDashboard() {
   return (
     <>
       <div className="bg-blue-900 min-h-screen w-[200px] flex flex-col items-start px-4 py-6 space-y-4">
-        <p className="text-white text-lg font-semibold">Teacher Dashboard</p>
+        <p className="text-white text-lg font-semibold">Reseller Dashboard</p>
 
         <div className="w-full">
           <Link href={"/reseller/placeorder"}>
