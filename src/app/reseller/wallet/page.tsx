@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {useState} from "react";
 import ArrowDownLeftIcon from "../../../../public/icons/ArrowDownLeftIcon";
@@ -101,13 +101,11 @@ function page() {
   };
 
   const handleSendMoney = () => {
-    // Send money logic here
     console.log("Send money clicked");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Top Navbar */}
       <nav className="bg-white shadow-lg border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -116,7 +114,6 @@ function page() {
               <h1 className="text-2xl font-bold text-gray-900">My Wallet</h1>
             </div>
 
-            {/* Wallet Balance Section */}
             <div className="flex items-center space-x-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg">
               <WalletIcon className="w-5 h-5" />
               <div className="flex items-center space-x-2">
@@ -140,11 +137,8 @@ function page() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Wallet Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Balance Card */}
           <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-6 rounded-2xl shadow-xl">
             <div className="flex items-center justify-between">
               <div>
@@ -161,7 +155,6 @@ function page() {
             </div>
           </div>
 
-          {/* Quick Actions */}
           <div className="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Quick Actions
@@ -184,7 +177,6 @@ function page() {
             </div>
           </div>
 
-          {/* Stats Card */}
           <div className="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               This Month
@@ -206,7 +198,6 @@ function page() {
           </div>
         </div>
 
-        {/* Transaction History Section */}
         <div className="bg-white rounded-2xl shadow-lg border border-slate-200">
           <div className="p-6 border-b border-slate-200">
             <div className="flex items-center space-x-3">
