@@ -33,6 +33,7 @@ export default function Page() {
       email: "the@gmail.com",
       location: "Kalyani",
       state: "WB",
+      status: "pending",
     },
     {
       id: "2",
@@ -41,6 +42,7 @@ export default function Page() {
       email: "the@gmail.com",
       location: "Kalyani",
       state: "OD",
+      status: "approved",
     },
     {
       id: "3",
@@ -49,6 +51,16 @@ export default function Page() {
       email: "the@gmail.com",
       location: "Kalyani",
       state: "UP",
+      status: "blocked",
+    },
+    {
+      id: "4",
+      name: "Hello City",
+      phone: "235552434",
+      email: "the@gmail.com",
+      location: "Kalyani",
+      state: "UP",
+      status: "rejected",
     },
   ];
 
@@ -119,6 +131,9 @@ export default function Page() {
                     State
                   </th>
                   <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3">
                     Action
                   </th>
                 </tr>
@@ -137,6 +152,37 @@ export default function Page() {
                     <td className="px-6 py-4">{c.email}</td>
                     <td className="px-6 py-4">{c.location}</td>
                     <td className="px-6 py-4">{c.state}</td>
+                    <td className="px-6 py-4">
+                      {(() => {
+                        switch (c.status) {
+                          case "approved":
+                            return (
+                              <p className="text-green-700 bg-green-100 px-2 py-1 rounded">
+                                Approved
+                              </p>
+                            );
+                          case "pending":
+                            return (
+                              <p className="text-yellow-700 bg-yellow-100 px-2 py-1 rounded">
+                                Pending
+                              </p>
+                            );
+                          case "rejected":
+                            return (
+                              <p className="text-red-700 bg-red-100 px-2 py-1 rounded">
+                                Rejected
+                              </p>
+                            );
+                          default:
+                            return (
+                              <p className="text-gray-700 bg-gray-100 px-2 py-1 rounded">
+                                Blocked
+                              </p>
+                            );
+                        }
+                      })()}
+                    </td>
+
                     <td className="px-6 py-4">
                       <button
                         onClick={() => setSelectedReseller(c)}
