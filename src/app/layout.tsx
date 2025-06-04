@@ -4,6 +4,7 @@ import "mantine-datatable/styles.layer.css";
 import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import {ToastContainer} from "react-toastify";
+import "rsuite/dist/rsuite-no-reset.min.css";
 import "./globals.css";
 import "./layout.css";
 
